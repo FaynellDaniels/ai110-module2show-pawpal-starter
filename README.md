@@ -116,7 +116,7 @@ tests/test_pawpal.py ..........                                                 
 
 ## 📸 Demo Walkthrough
 
-Main UI Features and User Actions
+## Main UI Features and User Actions
 
 The PawPal+ interface allows the user to enter an owner's name, add a pet, select the pet's species, and add pet-care tasks. The user can enter a task name, duration, and priority, then click Add task to add it to the task list. The current tasks are displayed in a table. The user can also select Generate schedule to create a schedule.
 
