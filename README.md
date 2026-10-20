@@ -77,8 +77,28 @@ pytest --cov
 Sample test output:
 
 ```
-# Paste your pytest output here
+=============================================================== test session starts ================================================================
+platform darwin -- Python 3.13.15, pytest-9.1.1, pluggy-1.7.0
+rootdir: /Users/nellie/Documents/ai110-module2show-pawpal-starter
+plugins: anyio-4.15.1
+collected 10 items                                                                                                                                 
+
+tests/test_pawpal.py ..........                                                                                                              [100%]
+
+================================================================ 10 passed in 0.03s ================================================================
 ```
+
+
+- The 10 tests cover four areas:
+
+- Basic behavior: mark_complete() changes a task's status, and adding a task to a pet increases its task count.
+
+- Sorting: sort_by_time() returns tasks from all pets in chronological order. It puts tasks with no time last, and returns an empty list when there are no tasks.
+
+- Recurring tasks: completing a daily task creates a new one due tomorrow. A weekly task creates one due in 7 days, and a one-time task creates nothing.
+
+- Conflict detection: two tasks at the same time produce a warning naming both. Tasks at different times produce none.
+
 
 ## 📐 Smarter Scheduling
 

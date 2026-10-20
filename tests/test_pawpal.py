@@ -76,3 +76,29 @@ def test_find_conflicts_returns_nothing_when_times_differ():
     pet.add_task(Task("Feed", due_time=time(9, 0)))
 
     assert Scheduler(Owner("Jordan", pets=[pet])).find_conflicts() == []
+
+
+def test_sort_by_time_returns_tasks_in_chronological_order():
+    buddy, whiskers = Pet("Buddy"), Pet("Whiskers")
+    buddy.add_task(Task("Evening walk", due_time=time(18, 30)))
+    whiskers.add_task(Task("Breakfast", due_time=time(8, 0)))
+    buddy.add_task(Task("Medication", due_time=time(12, 0)))
+    scheduler = Scheduler(Owner("Jordan", pets=[buddy, whiskers]))
+
+    sorted_tasks = scheduler.sort_by_time()
+
+    assert [task.description for task in sorted_tasks] == ["Breakfast", "Medication", "Evening walk"]
+
+
+def test_sort_by_time_puts_tasks_without_a_time_last():
+    pet = Pet("Buddy")
+    pet.add_task(Task("Anytime play"))
+    pet.add_task(Task("Breakfast", due_time=time(8, 0)))
+
+    sorted_tasks = Scheduler(Owner("Jordan", pets=[pet])).sort_by_time()
+
+    assert [task.description for task in sorted_tasks] == ["Breakfast", "Anytime play"]
+
+
+def test_sort_by_time_with_no_tasks_returns_empty_list():
+    assert Scheduler(Owner("Jordan", pets=[Pet("Buddy")])).sort_by_time() == []
