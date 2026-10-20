@@ -100,6 +100,8 @@ tests/test_pawpal.py ..........                                                 
 - Conflict detection: two tasks at the same time produce a warning naming both. Tasks at different times produce none.
 
 
+- Confidence Level - 4.5
+
 ## 📐 Smarter Scheduling
 
 
@@ -114,12 +116,76 @@ tests/test_pawpal.py ..........                                                 
 
 ## 📸 Demo Walkthrough
 
-Describe your app in numbered steps so a reader can follow along without watching a video:
+Main UI Features and User Actions
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+The PawPal+ interface allows the user to enter an owner's name, add a pet, select the pet's species, and add pet-care tasks. The user can enter a task name, duration, and priority, then click Add task to add it to the task list. The current tasks are displayed in a table. The user can also select Generate schedule to create a schedule.
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+## Example Workflow
+
+1. User enters the owner's name, such as "Jordan."
+
+2. User enters a pet's name, such as "Buddy," and selects "Dog" as the species.
+
+3. User enters a task such as "Morning walk," along with its duration and priority.
+
+4. User clicks Add task, and the task appears in the task list.
+
+5. User adds additional tasks for Buddy or another pet, such as feeding, medication, or grooming.
+
+6. The system stores the pets under the Owner and the tasks under each Pet.
+
+7. The Scheduler collects the tasks from the owner and can sort them by time.
+
+8. The scheduler can identify conflicts when two tasks are scheduled for the same time.
+
+9. The user can view pending tasks or tasks belonging to a specific pet.
+
+10. When a recurring task is completed, the scheduler creates its next occurrence. For example, completing a daily breakfast task creates another breakfast task for the following day.
+
+## Key Scheduler Behaviors
+
+- The Scheduler can sort tasks in chronological order, filter tasks by completion status or pet, detect conflicts between tasks scheduled at the same time, and prioritize pending tasks. It can also generate a care plan based on the amount of available time. Daily and weekly tasks automatically receive a new occurrence when completed, while one-time tasks do not repeat.
+
+## Sample CLI Output
+```
+==============================================
+  Today's Schedule - Jordan
+==============================================
+  TIME      TASK              PET        LENGTH
+----------------------------------------------
+  7:30 AM   Morning walk      Buddy       30 min
+  8:00 AM   Breakfast         Whiskers    10 min
+  12:00 PM  Give medication  Buddy        5 min
+  6:30 PM   Play session      Whiskers    20 min
+----------------------------------------------
+  4 tasks, 65 min total
+
+Tasks as added (out of order):
+  18:30  Play session
+  12:00  Give medication
+  08:00  Breakfast
+  07:30  Morning walk
+
+Sorted by time:
+  07:30  Morning walk
+  08:00  Breakfast
+  12:00  Give medication
+  18:30  Play session
+
+Pending tasks only:
+  Play session
+  Breakfast
+  Morning walk
+
+Buddy's tasks only:
+  Give medication
+  Morning walk
+
+Checking for conflicts:
+  Warning: 08:00 AM conflict - Breakfast (Whiskers) and Grooming (Buddy)
+  Warning: 06:30 PM conflict - Play session (Whiskers) and Brush fur (Whiskers)
+
+Completing Breakfast (daily):
+  Next Breakfast is due [tomorrow's date]
+  Whiskers now has 3 tasks
+```
