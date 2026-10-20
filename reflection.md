@@ -36,8 +36,7 @@
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+- The scheduler considers task time, duration, priority, completion status, and task frequency. Priority determines which pending tasks are considered first when creating a plan, while time is used to sort tasks in chronological order. Duration is used when generating a plan to make sure the selected tasks fit within the available time. The scheduler also checks for conflicts when two tasks have the same date and start time. I decided these constraints mattered most because they are the main things a pet owner would need when planning daily pet care. I kept the rules simple so the system would be easier to understand and test.
 
 **b. Tradeoffs**
 
@@ -55,7 +54,7 @@
 
 **b. Judgment and verification**
 
--The first version AI created was more complicated than I needed. It included extra classes and fields that were not necessary for my project. I asked AI to simplify the code and make it easier to understand. The final version had the required classes, fewer fields, and simple docstrings for the methods. I checked the AI's work by running the program instead of only looking at the code. I ran main.py, checked the schedule output, and wrote two tests for mark_complete() and adding a task to a pet. I found a bug where a field named time conflicted with the time class and caused the program to crash. I fixed this by renaming the field to due_time. 
+- The first version AI created was more complicated than I needed. It included extra classes and fields that were not necessary for my project. I asked AI to simplify the code and make it easier to understand. The final version had the required classes, fewer fields, and simple docstrings for the methods. I checked the AI's work by running the program instead of only looking at the code. I ran main.py, checked the schedule output, and wrote two tests for mark_complete() and adding a task to a pet. I found a bug where a field named time conflicted with the time class and caused the program to crash. I fixed this by renaming the field to due_time. 
 
 ---
 
@@ -63,13 +62,11 @@
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+- I tested that tasks can be marked as complete and added to a pet. I also tested that daily and weekly tasks create their next occurrence after being completed, while one-time tasks do not. Other tests check that the scheduler can find conflicts, sort tasks by time, place tasks without a time at the end, and return an empty list when there are no tasks. These tests were important because they check the main behaviors of the Task, Pet, and Scheduler classes.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+- I am fairly confident that the main scheduler features work correctly because I ran the program, checked the output, and created tests for the important behaviors. I also found and fixed a bug where the field time conflicted with the time class. If I had more time, I would test overlapping tasks, such as a 30-minute task starting at 8:00 and another task starting at 8:15. I would also test invalid or unusual inputs, such as negative durations, very large available times, and tasks with missing dates or times.
 
 ---
 
@@ -77,12 +74,12 @@
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+- I am most satisfied with how the different classes work together. The Owner manages pets, each Pet manages its tasks, and the Scheduler uses those tasks to sort, filter, and create plans. I also like that I was able to test the important behaviors and catch bugs instead of assuming the AI-generated code was correct.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+- If I had another iteration, I would improve the conflict detection. Right now, it only detects tasks with the exact same start time and does not detect overlapping tasks. I would also improve the user interface by connecting the Streamlit buttons directly to the scheduler so users could actually generate and view a schedule instead of mainly using it as a demo interface.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+- One important thing I learned is that AI can help with implementing  a system, but I still need to understand and test the code myself. AI's first version was more complicated than I needed, and I found a real bug by running the program. This showed me that clear requirements, simple class designs, and testing are important when using AI to build a system.

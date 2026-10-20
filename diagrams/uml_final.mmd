@@ -1,0 +1,46 @@
+classDiagram
+    class Owner {
+        +String name
+        +List~Pet~ pets
+        +add_pet(pet)
+        +get_all_tasks() List~Task~
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +List~Task~ tasks
+        +add_task(task)
+        +remove_task(task)
+    }
+
+    class Task {
+        +String description
+        +Time due_time
+        +Integer duration
+        +Integer priority
+        +String frequency
+        +Date due_date
+        +Boolean completed
+        +mark_complete()
+        +next_occurrence() Task
+    }
+
+    class Scheduler {
+        +Owner owner
+        +get_pending_tasks() List~Task~
+        +mark_task_complete(pet, task) Task
+        +find_conflicts() List~String~
+        +sort_by_time(tasks) List~Task~
+        +filter_tasks(completed, pet_name) List~Task~
+        +prioritize_tasks() List~Task~
+        +generate_plan(available_minutes) List~Task~
+        +explain_plan(plan) String
+    }
+
+    Owner "1" *-- "0..*" Pet : has
+    Pet "1" *-- "0..*" Task : has
+    Scheduler "1" --> "1" Owner : reads tasks from
+    Scheduler ..> Task : sorts, filters, plans
+    Scheduler ..> Pet : adds next task to
+    Task ..> Task : next_occurrence() creates copy
