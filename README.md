@@ -42,16 +42,26 @@ pip install -r requirements.txt
 6. Connect your logic to the Streamlit UI in `app.py`.
 7. Refine UML so it matches what you actually built.
 
+## Implementation Summary
+The implementation builds the PawPal system using several classes that work together to manage pet owners, pets, preferences, and scheduling. The Owner class stores information about pet owners and their preferences, while the Pet class represents individual pets and their details. The Schedule class manages scheduled activities or appointments for pets, and the Scheduler class helps create and organize these schedules. Together, these classes allow the system to connect owners with their pets, use owner preferences, and manage pet-related schedules in an organized way.
+
 ## 🖥️ Sample Output
 
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
 ```
-# e.g.:
-# Daily plan for Biscuit (Golden Retriever):
-#   08:00 — Morning walk (30 min) [priority: high]
-#   09:00 — Feeding (10 min) [priority: high]
-#   ...
+==============================================
+  Today's Schedule - Jordan
+==============================================
+  TIME      TASK              PET        LENGTH
+----------------------------------------------
+   7:30 AM  Morning walk      Buddy       30 min
+   8:00 AM  Breakfast         Whiskers    10 min
+  12:00 PM  Give medication   Buddy        5 min
+   6:30 PM  Play session      Whiskers    20 min
+----------------------------------------------
+  4 tasks, 65 min total
+
 ```
 
 ## 🧪 Testing PawPal+
@@ -72,14 +82,15 @@ Sample test output:
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
+
 
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Task sorting | Scheduler.sort_by_time(), Scheduler.prioritize_tasks() | Sorts by time of day (earliest first, tasks with no time last), or by priority (highest first, then earliest time) |
+| Filtering | Scheduler.filter_tasks() | Filters by completion status (completed=True/False), by pet (pet_name="Buddy"), or both |
+| Conflict handling | Scheduler.find_conflicts() | Returns a warning when two pending tasks share the same date and start time (same pet or different pets); overlapping durations are not checked |
+| Recurring tasks | Scheduler.mark_task_complete(), Task.next_occurrence() | Completing a "daily" task adds a copy due tomorrow; a "weekly" task adds one due in 7 days |
+
 
 ## 📸 Demo Walkthrough
 

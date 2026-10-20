@@ -41,8 +41,9 @@
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+- One tradeoff my scheduler makes is that conflict detection only checks for exact matching start times instead of overlapping durations. For example, if Buddy has a 30-minute walk at 8:00 and Whiskers has a task at 8:15, the scheduler will not warn me, even though the owner cannot do both at once. It only warns when two pending tasks have the same date and the same start time. Completed tasks and tasks without a time are ignored.
+
+- This tradeoff is reasonable for this scenario because it keeps the code simple and easy to understand. The check groups tasks by start time in one pass, and it returns a warning message instead of crashing the program. A pet owner's daily tasks are usually few and spread across the day, so exact matches are the most obvious conflicts to catch. Checking overlaps would mean sorting the tasks and comparing each task's start time plus duration with the next task's start time, which is more complicated. If I had more time, I would add overlap detection to make the warnings more accurate.
 
 ---
 
@@ -50,13 +51,11 @@
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+- I used AI for implementing code, and simplifying the code. I started with my class skeletons and asked AI to complete the Task, Pet, Owner, and Scheduler classes. I also used AI to simplify the code, create a demo in main.py, make the schedule easier to read, write tests, and add docstrings. When I had errors, I gave AI the exact error message so it could explain what went wrong. The most helpful prompts were specific and included the file name and requirements. For example, asking AI to complete the four main classes in pawpal_system.py worked well because I clearly explained what each class needed to do. I also asked AI to suggest formatting ideas before making changes, which let me choose the version I liked.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+-The first version AI created was more complicated than I needed. It included extra classes and fields that were not necessary for my project. I asked AI to simplify the code and make it easier to understand. The final version had the required classes, fewer fields, and simple docstrings for the methods. I checked the AI's work by running the program instead of only looking at the code. I ran main.py, checked the schedule output, and wrote two tests for mark_complete() and adding a task to a pet. I found a bug where a field named time conflicted with the time class and caused the program to crash. I fixed this by renaming the field to due_time. 
 
 ---
 
